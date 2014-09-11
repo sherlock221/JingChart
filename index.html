@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Doughnut Chart</title>
+    <script src="js/Chart.js"></script>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #canvas-holder{
+            width:30%;
+        }
+
+        .canvas-base{
+            width: 120px;
+            height: 120px;
+        }
+        .canvas-01{
+
+        }
+
+        .canvas-02{
+
+        }
+        .canvas-03{
+
+        }
+
+        .ib{
+            display: inline-block;
+        }
+
+        #all-canvas > .canvas-main{
+            margin:  30px 20px;
+        }
+
+        #all-canvas > b{
+
+        }
+        .canvas-main{
+            position: relative;
+        }
+        .canvas-txt{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+
+            color:darkgoldenrod;
+            font-size: 18px;
+            margin-left: -17px;
+            margin-top: -13px;
+
+        }
+        .bar{
+            width: 800px;
+            height: 480px;
+        }
+
+    </style>
+
+    <!--[if lte IE 8]>
+    <script src="js/excanvas.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div style="text-align: center;" id="all-canvas">
+
+    <div class="canvas-main ib">
+            <span   class="ib canvas-base canvas-01">
+                     <canvas id="chart-area1" width="500" height="500"/>
+            </span>
+
+        <span class="ib canvas-txt">18%</span>
+    </div>
+
+    <div class="canvas-main ib">
+        <span   class="ib canvas-base canvas-02">
+        <canvas id="chart-area2" width="120" height="120"/>
+        </span>
+
+        <span class="ib canvas-txt">28%</span>
+    </div>
+
+    <div class="canvas-main ib">
+        <span   class="ib canvas-base canvas-03">
+             <canvas id="chart-area3" width="120" height="120"/>
+        </span>
+
+        <span class="ib canvas-txt">38%</span>
+    </div>
+
+</div>
+
+
+<div class="ib bar">
+        <canvas id="chart-area4" />
+</div>
+
+
+
+<script>
+
+    //饼图 01
+    var canvas01_Data = [
+        {
+            value: 67,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "昨天"
+        },
+        {
+            value: 56,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "今天"
+        }
+    ];
+
+        //饼图 02
+        var canvas02_Data = [
+            {
+                value: 67,
+                color:"red",
+                highlight: "",
+                label: "昨天"
+            },
+            {
+                value: 56,
+                color: "#CCCCCC",
+                highlight: "#5AD3D1",
+                label: "今天"
+            }
+        ];
+        //饼图 03
+        var canvas03_Data = [
+            {
+                value: 67,
+                color:"#F7464A",
+                highlight: "#FF5A5E",
+                label: "昨天"
+            },
+            {
+                value: 56,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "今天"
+            }
+        ];
+
+        //树状图
+        var bar_data = {
+
+
+            labels : ["January","February","March","April","May","June","July"],
+            datasets : [
+                {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,1)",
+                    data : [65,59,90,81,56,55,40]
+                },
+                {
+                    fillColor : "rgba(151,187,205,0.5)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    data : [28,48,40,19,96,27,100]
+                }
+            ]
+        };
+
+
+    window.onload = function(){
+
+
+        var ctx1 = document.getElementById("chart-area1").getContext("2d");
+        window.myDoughnut = new Chart(ctx1).Doughnut(canvas01_Data, {responsive : true});
+
+
+        //        //饼图02 初始化
+        var ctx2 = document.getElementById("chart-area2").getContext("2d");
+        new Chart(ctx2).Doughnut(canvas02_Data, {responsive : true});
+
+        //饼图03 初始化
+        var ctx3 = document.getElementById("chart-area3").getContext("2d");
+        new Chart(ctx3).Doughnut(canvas03_Data, {responsive : true});
+
+        //树状图
+        var ctx4 = document.getElementById("chart-area4").getContext("2d");
+        new Chart(ctx4).Bar(bar_data, {
+            responsive : true,
+            scaleShowLabels : true,
+            scaleShowGridLines : true,
+            barShowStroke : false
+        });
+    };
+
+
+
+</script>
+</body>
+</html>
